@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_metadata",
+  "info": {
+    "name": "SiteMetadata",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "site_title": {
+      "type": "string"
+    },
+    "welcome_title": {
+      "type": "string"
+    },
+    "welcome_description": {
+      "type": "text"
+    }
+  }
+}

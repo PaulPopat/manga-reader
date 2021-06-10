@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "command": "deno",
+      "args": [
+        "run",
+        "--unstable",
+        "--allow-read",
+        "--allow-write",
+        "https://deno.land/x/sote@0.8.3/build.ts"
+      ],
+      "group": "build",
+      "label": "Build App",
+      "options": { "cwd": "${workspaceFolder}/manga-reader-frontend" }
+    },
+
+    {
+      "type": "shell",
+      "command": "deno",
+      "args": [
+        "run",
+        "--unstable",
+        "--allow-read",
+        "--allow-net",
+        "https://deno.land/x/sote@0.8.3/start.ts"
+      ],
+      "group": "build",
+      "label": "Start App",
+      "options": { "cwd": "${workspaceFolder}/manga-reader-frontend" }
+    },
+    {
+      "type": "shell",
+      "command": "./dev.sh",
+      "group": "build",
+      "label": "dev",
+      "options": { "cwd": "${workspaceFolder}/manga-reader-frontend" }
+    }
+  ]
+}

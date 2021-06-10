@@ -1,0 +1,19 @@
+{
+  "deno.enable": true,
+  "deno.lint": false,
+  "deno.unstable": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    ".vscode": true,
+    "**/.sote": true,
+    "**/.tmp": true,
+    "**/.cache": true,
+    "**/build": true,
+    "**/node_modules": true,
+    "**/.strapi-updater.json": true
+  }
+}

@@ -1,0 +1,22 @@
+<title>{props.site.welcome_title} - {props.site.site_title}</title>
+<description>{props.site.welcome_description}</description>
+<template>
+  <layout>
+    <catalogue />
+  </layout>
+</template>
+<style>
+  .description {
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  .meta-title {
+    color: var(--colour-body-light);
+  }
+</style>
+<script area="server" method="get">
+  return {
+    site: await context.SingleItem("site-metadata")
+  };
+</script>

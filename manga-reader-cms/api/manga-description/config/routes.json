@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/manga-description",
+      "handler": "manga-description.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/manga-description",
+      "handler": "manga-description.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/manga-description",
+      "handler": "manga-description.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

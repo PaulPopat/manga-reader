@@ -1,0 +1,70 @@
+<template>
+  <div class=":props.card_class">
+    <if check=":props.image">
+      <if check=":props.href">
+        <a href=":props.href">
+          <img height="300" class="card-thumbnail" src=":props.image" />
+        </a>
+      </if>
+      <if check=":!props.href">
+        <img height="300" class="card-thumbnail" src=":props.image" />
+      </if>
+    </if>
+    <div class="card-content">
+      <children />
+    </div>
+  </div>
+</template>
+<style>
+  .card {
+    display: grid;
+    grid-template-columns: 220px auto;
+    gap: 1rem; 
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+
+    color: var(--colour-body);
+    background: var(--colour-background);
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+
+  .card.no-image {
+    grid-template-columns: auto;
+  }
+
+  a.card:hover {
+    background: var(--colour-background-hover);
+  }
+
+  .card-thumbnail {
+    border-radius: var(--border-radius);
+  }
+
+  @media screen and (max-width: 600px) {
+    .card {
+      grid-template-columns: auto;
+    }
+
+    .card-thumbnail {
+      margin: auto;
+    }
+  }
+</style>
+<script area="server">
+  if (props.url) {
+    const url = typeof props.url === "string" ? props.url : context.Combine(...props.url);
+    const query = props.query || {};
+    return {
+      ...props,
+      card_class: "card" + (!props.image ? " no-image" : ""),
+      href: context.WithQuery(url, query)
+    }
+  } else {
+    return {
+      ...props,
+      card_class: "card" + (!props.image ? " no-image" : "")
+    }
+  }
+</script>

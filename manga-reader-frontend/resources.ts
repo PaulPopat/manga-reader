@@ -1,0 +1,107 @@
+import {
+  Assert,
+  IsObject,
+  IsString,
+  IsArray,
+  Checker,
+} from "https://deno.land/x/safe_type/mod.ts";
+
+export async function ReadJson<T>(path: string, checker: Checker<T>) {
+  const text = await Deno.readTextFile(path);
+  const data = JSON.parse(text);
+  Assert(checker, data);
+
+  return data;
+}
+
+export function Combine(...parts: string[]) {
+  return parts
+    .map((p, i) => {
+      let result = p;
+      if (!result.endsWith("/") && i < parts.length - 1) {
+        result = result + "/";
+      }
+
+      if (result.startsWith("/") && i > 0) {
+        result = result.substr(1);
+      }
+
+      return result;
+    })
+    .join("");
+}
+
+export function WithQuery(
+  url: string,
+  query: Record<string, string[] | string>
+) {
+  const rendered = Object.keys(query)
+    .map((k) => {
+      const val = query[k];
+      if (IsArray(IsString)(val)) {
+        return val
+          .map((v) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
+          .join("&");
+      }
+
+      return encodeURIComponent(k) + "=" + encodeURIComponent(val);
+    })
+    .join("&");
+
+  if (!rendered.trim()) {
+    return url;
+  }
+
+  if (url.includes("?")) {
+    return url + "&" + rendered;
+  }
+
+  return url + "?" + rendered;
+}
+
+const config = await ReadJson(
+  "./config.json",
+  IsObject({ strapi_url: IsString })
+);
+
+export async function Collection(collection: string, query?: Record<string, string>) {
+  const url = Combine(config.strapi_url, collection);
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data;
+}
+
+export async function CollectionItem(collection: string, id: string) {
+  const url = WithQuery(Combine(config.strapi_url, collection), { slug: id });
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data[0];
+}
+
+export async function SingleItem(id: string) {
+  const url = Combine(config.strapi_url, id);
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data;
+}

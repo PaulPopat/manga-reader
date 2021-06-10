@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publishers",
+  "info": {
+    "name": "Publishers",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "[a-z0-9\\-]"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "manga": {
+      "via": "publisher",
+      "collection": "manga-books"
+    }
+  }
+}

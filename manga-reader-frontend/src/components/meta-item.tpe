@@ -1,0 +1,22 @@
+<template>
+  <p>
+    <span class="meta-title">{props.title}:</span>
+    &nbsp;
+    <a href=":props.href">
+      <children />
+    </a>
+  </p>
+</template>
+<style>
+  .meta-title {
+    color: var(--colour-body-light);
+  }
+</style>
+<script area="server">
+  const url = typeof props.url === "string" ? props.url : context.Combine(...props.url);
+  const query = props.query || {};
+  return {
+    href: context.WithQuery(url, query),
+    ...props,
+  };
+</script>

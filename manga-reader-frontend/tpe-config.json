@@ -1,0 +1,12 @@
+{
+  "static": "./_",
+  "pages": "./src/pages",
+  "components": ["./src/components"],
+  "lang": "en",
+  "port": 3000,
+  "behavior_in_tag": false,
+  "email": false,
+  "author": "",
+  "favicon": [],
+  "resources": "./resources.ts"
+}

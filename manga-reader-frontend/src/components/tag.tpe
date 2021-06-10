@@ -1,0 +1,26 @@
+<template>
+  <a href=":props.href" class="tag">
+    <children />
+  </a>
+</template>
+<style>
+  .tag {
+    display: inline-block;
+    color: var(--colour-body);
+    background: var(--colour-background-light);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+  }
+
+  .tag:hover {
+    background: var(--colour-background-hover);
+  }
+</style>
+<script area="server">
+  const url = typeof props.url === "string" ? props.url : context.Combine(...props.url);
+  const query = props.query || {};
+  return {
+    href: context.WithQuery(url, query)
+  };
+</script>

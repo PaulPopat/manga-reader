@@ -1,0 +1,61 @@
+<title>{props.manga.title} - {props.site.site_title}</title>
+<description>{props.site.welcome_description}</description>
+<template>
+  <layout>
+    <card image=":props.page_one_url">
+      <h2>{props.manga.title}</h2>
+      <meta-item
+        title=":props.metadata.artist"
+        url=":['/artists', props.manga.artist.slug]"
+      >
+        {props.manga.artist.name}
+      </meta-item>
+      <meta-item
+        title=":props.metadata.publisher"
+        url=":['/publishers', props.manga.publisher.slug]"
+      >
+        {props.manga.publisher.name}
+      </meta-item>
+      <div class="description">
+        <span class="meta-title">{props.metadata.description}:</span>
+        <br />
+        <markdown>{props.manga.description}</markdown>
+      </div>
+      <div class="description">
+        <span class="meta-title">{props.metadata.tags}:</span>
+        <br />
+        <for subject=":props.manga.tags" key="tag">
+          <tag url=":['/tags', tag.slug]">{tag.name}</tag>
+          &nbsp;
+        </for>
+      </div>
+    </card>
+    <card>
+      <div class="read-container">
+        <btn url=":['/manga', props.manga.slug, '1']">{props.metadata.start_reading}</btn>
+      </div>
+    </card>
+  </layout>
+</template>
+<style>
+  .meta-title {
+    color: var(--colour-body-light);
+  }
+
+  .read-container {
+    text-align: center;
+  }
+
+  .description {
+    margin-bottom: 1rem;
+  }
+</style>
+<script area="server" method="get">
+  const manga = await context.CollectionItem("manga-books", query.slug);
+  return {
+    manga: manga,
+    metadata: await context.SingleItem("manga-description"),
+    page_one_url: manga.page_template.replace('{{slug}}', manga.slug).replace('{{page}}', '001'),
+    site: await context.SingleItem("site-metadata")
+  };
+</script>

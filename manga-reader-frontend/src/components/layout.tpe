@@ -1,0 +1,41 @@
+<template>
+  <div class="layout">
+    <children />
+  </div>
+</template>
+<style>
+  .layout {
+    --border-radius: 1rem;
+    --border-radius-sm: 0.25rem;
+    --box-shadow: 0px 0px 22px -3px rgba(0,0,0,0.42);
+
+    --colour-body: #222;
+    --colour-body-light: #555;
+
+    --colour-background: #fff;
+    --colour-background-hover: #fdfdfd;
+
+    --colour-background-light: #dfdce3;
+
+    --colour-main: #4abdac;
+    --colour-warning: #fc4a1a;
+    --colour-info: #f7b733;
+
+    color: var(--colour-body);
+    padding: 2rem;
+  }
+</style>
+<style no-hash>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+
+  a {
+    color: var(--colour-warning);
+  }
+
+  a:visited {
+    color: var(--colour-info);
+  }
+</style>

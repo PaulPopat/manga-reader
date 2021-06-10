@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "manga_descriptions",
+  "info": {
+    "name": "MangaMetadata",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "artist": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "start_reading": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "manga_books",
+  "info": {
+    "name": "MangaBooks",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "[a-z0-9\\-]"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "pages": {
+      "type": "integer",
+      "required": true
+    },
+    "artist": {
+      "via": "manga",
+      "model": "artists"
+    },
+    "publisher": {
+      "via": "manga",
+      "model": "publishers"
+    },
+    "tags": {
+      "via": "manga",
+      "collection": "tags",
+      "dominant": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "page_template": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

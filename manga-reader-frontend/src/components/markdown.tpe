@@ -1,0 +1,12 @@
+<template>
+  <div data-markdown="true">
+    <children />
+  </div>
+</template>
+<script area="client" src="./resources/showdown.min.js"></script>
+<script area="client">
+  var converter = new showdown.Converter();
+  document.querySelectorAll('[data-markdown="true"]').forEach(function (el) {
+    el.innerHTML = converter.makeHtml(el.textContent);
+  })
+</script>
