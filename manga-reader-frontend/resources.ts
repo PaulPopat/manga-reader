@@ -14,6 +14,73 @@ export async function ReadJson<T>(path: string, checker: Checker<T>) {
   return data;
 }
 
+const config = await ReadJson(
+  "./config.json",
+  IsObject({ strapi_url: IsString })
+);
+
+export async function Collection(
+  collection: string,
+  query?: Record<string, string>
+) {
+  const url = WithQuery(Combine(config.strapi_url, collection), query ?? {});
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data;
+}
+
+export async function CollectionCount(
+  collection: string,
+  query?: Record<string, string>
+) {
+  const url = Combine(config.strapi_url, collection, "count");
+  const res = await fetch(url);
+  const data = await res.text();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return parseInt(data);
+}
+
+export async function CollectionItem(collection: string, id: string) {
+  const url = WithQuery(Combine(config.strapi_url, collection), { slug: id });
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data[0];
+}
+
+export async function SingleItem(id: string) {
+  const url = Combine(config.strapi_url, id);
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data;
+}
+
 export function Combine(...parts: string[]) {
   return parts
     .map((p, i) => {
@@ -59,49 +126,36 @@ export function WithQuery(
   return url + "?" + rendered;
 }
 
-const config = await ReadJson(
-  "./config.json",
-  IsObject({ strapi_url: IsString })
-);
+export function Classes(
+  ...parts: (
+    | string
+    | Record<string, string | number | boolean | undefined | null>
+  )[]
+) {
+  return parts
+    .map((p) => {
+      if (IsString(p)) {
+        return p;
+      }
 
-export async function Collection(collection: string, query?: Record<string, string>) {
-  const url = Combine(config.strapi_url, collection);
-  const res = await fetch(url);
-  const data = await res.json();
-  if (res.status > 399) {
-    console.error(url + " => " + res.status);
-    try {
-      console.error(data);
-    } catch {}
-  }
-
-  return data;
+      return Object.keys(p)
+        .filter((k) => p[k])
+        .join(" ");
+    })
+    .join(" ");
 }
 
-export async function CollectionItem(collection: string, id: string) {
-  const url = WithQuery(Combine(config.strapi_url, collection), { slug: id });
-  const res = await fetch(url);
-  const data = await res.json();
-  if (res.status > 399) {
-    console.error(url + " => " + res.status);
-    try {
-      console.error(data);
-    } catch {}
-  }
-
-  return data[0];
+function Pad(num: number, size: number) {
+  let result = num.toString();
+  while (result.length < size) result = "0" + result;
+  return result;
 }
 
-export async function SingleItem(id: string) {
-  const url = Combine(config.strapi_url, id);
-  const res = await fetch(url);
-  const data = await res.json();
-  if (res.status > 399) {
-    console.error(url + " => " + res.status);
-    try {
-      console.error(data);
-    } catch {}
-  }
-
-  return data;
+export function PageUrl(
+  manga: { page_template: string; slug: string },
+  page: number
+) {
+  return manga.page_template
+    .replace("{{slug}}", manga.slug)
+    .replace("{{page}}", Pad(page, 3));
 }

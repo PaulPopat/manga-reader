@@ -1,22 +1,25 @@
 <title>{props.site.welcome_title} - {props.site.site_title}</title>
 <description>{props.site.welcome_description}</description>
 <template>
-  <layout>
-    <catalogue />
-  </layout>
+  <c:dark-background>
+    <catalogue manga=":props.manga" />
+    <c:paginator skip=":props.skip" take=":props.take" count=":props.count" />
+  </c:dark-background>
 </template>
-<style>
-  .description {
-    max-height: 200px;
-    overflow: hidden;
-  }
-
-  .meta-title {
-    color: var(--colour-body-light);
-  }
-</style>
+<style no-hash src="./resources/styles.css"></style>
 <script area="server" method="get">
   return {
-    site: await context.SingleItem("site-metadata")
+    site: await context.SingleItem("site-metadata"),
+    manga: await context.Collection(
+      "manga-books",
+      {
+        _start: query.skip || "0",
+        _limit: query.take || "10",
+        _sort: "updated_at:DESC",
+      }
+    ),
+    skip: parseInt(query.skip || "0"),
+    take: parseInt(query.take || "10"),
+    count: await context.CollectionCount("manga-books"),
   };
 </script>

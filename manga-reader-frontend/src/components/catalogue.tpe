@@ -1,48 +1,20 @@
 <template>
-  <for subject=":props.manga" key="manga">
-    <card
-      url=":['/manga', manga.slug]"
-      image=":manga.page_template.replace('{{slug}}', manga.slug).replace('{{page}}', '001')"
-    >
-      <h2><a href=":context.Combine('/manga', manga.slug)">{manga.title}</a></h2>
-      <meta-item
-        title=":props.metadata.artist"
-        url=":['/artists', manga.artist.slug]"
-      >
+  <for subject=":props" key="manga">
+    <c:image-card href=":manga.thumbnail" alt=":manga.title">
+      <c:caption href=":context.Combine('/artist', manga.artist.slug)">
         {manga.artist.name}
-      </meta-item>
-      <meta-item
-        title=":props.metadata.publisher"
-        url=":['/artists', manga.publisher.slug]"
-      >
-        {manga.publisher.name}
-      </meta-item>
-      <div class="description">
-        <span class="meta-title">{props.metadata.description}:</span>
-        <br />
-        <markdown>{manga.description}</markdown>
-      </div>
-    </card>
+      </c:caption>
+      <c:heading href=":context.Combine('/manga', manga.slug)">
+        {manga.title}
+      </c:heading>
+      <c:description>{manga.description}</c:description>
+    </c:image-card>
   </for>
 </template>
-<style>
-  .description {
-    max-height: 200px;
-    overflow: hidden;
-  }
-
-  .meta-title {
-    color: var(--colour-body-light);
-  }
-</style>
 <script area="server" method="get">
-  const manga = await context.Collection("manga-books");
-  return {
-    manga: manga.filter(m =>
-      (!props.artist || m.artist.slug === props.artist) &&
-      (!props.publisher || m.publisher.slug === props.publisher) &&
-      (!props.tag || m.tags.find(t => t.slug === props.tag) != null)
-    ),
-    metadata: await context.SingleItem("manga-description")
-  };
+  return props.manga.map(m => ({
+    ...m,
+    thumbnail: context.PageUrl(m, 1),
+    description: m.description.substr(0, 200) + (m.description.length > 200 ? "..." : "")
+  }));
 </script>

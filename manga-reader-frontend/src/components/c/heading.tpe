@@ -1,0 +1,15 @@
+<template>
+  <if check=":props.href">
+    <a
+      href=":props.href"
+      class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+    >
+      <children />
+    </a>
+  </if>
+  <if check=":!props.href">
+    <h2 class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+      <children />
+    </h2>
+  </if>
+</template>

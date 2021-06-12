@@ -1,0 +1,8 @@
+<template>
+  <a
+    href=":props.href"
+    class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
+  >
+    <children />
+  </a>
+</template>

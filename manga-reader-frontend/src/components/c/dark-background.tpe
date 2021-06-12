@@ -1,0 +1,5 @@
+<template>
+  <div class="bg-gradient-to-r from-indigo-900 via-green-800 to-purple-900 py-6">
+    <children />
+  </div>
+</template>

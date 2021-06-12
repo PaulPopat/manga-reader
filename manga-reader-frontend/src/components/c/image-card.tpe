@@ -1,0 +1,16 @@
+<template>
+  <div class="max-w-md mx-auto mb-6 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="md:flex">
+      <div class="md:flex-shrink-0">
+        <img
+          class="h-48 w-full object-cover md:h-full md:w-40"
+          src=":props.href"
+          alt=":props.alt"
+        />
+      </div>
+      <div class="p-8">
+        <children />
+      </div>
+    </div>
+  </div>
+</template>

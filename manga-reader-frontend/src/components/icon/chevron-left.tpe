@@ -5,7 +5,7 @@
     height=":props.height"
     viewBox="0 0 24 24"
     fill="none"
-    stroke=":props.colour"
+    class=":context.Classes('stroke-current', { [`text-${props.colour}`]: props.colour })"
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
