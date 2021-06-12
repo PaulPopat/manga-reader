@@ -1,5 +1,5 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
-<description>{props.site.welcome_description}</description>
+<description>{props.manga.description}</description>
 <template>
   <c:container>
     <c:grid cols="1" md="3">

@@ -1,5 +1,5 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
-<description>{props.site.welcome_description}</description>
+<description>{props.manga.description}</description>
 <template>
   <div style="display: grid; height: 100vh; grid-template-rows: 100%; grid-template-columns: 50px auto 50px;">
     <a href=":props.prev_page" class="flex h-100 justify-center items-center">
