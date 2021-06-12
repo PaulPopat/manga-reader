@@ -16,7 +16,7 @@ RUN npm install
 RUN npm run build
 
 WORKDIR /app/manga-reader-frontend
-RUN /root/.deno/bin/deno run --unstable --allow-read --allow-write https://deno.land/x/sote@0.8.4/build.ts
+RUN /root/.deno/bin/deno run --unstable --allow-read --allow-write https://deno.land/x/sote@0.8.5/build.ts
 
 WORKDIR /app
 

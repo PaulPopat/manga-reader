@@ -1,36 +1,27 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
 <description>{props.site.welcome_description}</description>
 <template>
-  <layout>
-    <div class="outline">
-      <a href=":props.prev_page" class="navigation">
-        <icon:chevron-left width="40" height="40" colour="var(--colour-body)" />
-      </a>
-      <a href=":props.next_page" class="image-container">
-        <img src=":props.manga.page_template.replace('{{slug}}', props.manga.slug).replace('{{page}}', props.page_string)" />
-      </a>
-      <a href=":props.next_page" class="navigation">
-        <icon:chevron-right width="40" height="40" colour="var(--colour-body)" />
-      </a>
-    </div>
-  </layout>
+  <div style="display: grid; height: 100vh; grid-template-rows: 100%; grid-template-columns: 50px auto 50px;">
+    <a href=":props.prev_page" class="flex h-100 justify-center items-center">
+      <icon:chevron-left width="40" height="40" />
+    </a>
+    <a href=":props.next_page">
+      <img class="h-full w-auto mx-auto" src=":context.PageUrl(props.manga, props.page)" />
+    </a>
+    <a href=":props.next_page" class="flex h-100 justify-center items-center">
+      <icon:chevron-right width="40" height="40" />
+    </a>
+  </div>
 </template>
 <script area="server" method="get">
   const manga = await context.CollectionItem("manga-books", query.slug);
   const page = parseInt(query.page);
-
-  function pad(num, size) {
-      num = num.toString();
-      while (num.length < size) num = "0" + num;
-      return num;
-  }
 
   return {
     manga: manga,
     metadata: await context.SingleItem("manga-description"),
     site: await context.SingleItem("site-metadata"),
     page,
-    page_string: pad(page, 3),
     next_page: page < manga.pages
       ? context.Combine('/manga', manga.slug, (page + 1).toString())
       : context.Combine('/manga', manga.slug),
@@ -39,33 +30,4 @@
       : context.Combine('/manga', manga.slug)
   };
 </script>
-<style>
-  .outline {
-    background: var(--colour-background-light);
-
-    display: grid;
-    grid-template-columns: 50px auto 50px;
-  }
-
-  .image-container {
-    display: block;
-  }
-
-  .navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-    border-left: 1px solid var(--colour-background-hover);
-    border-right: 1px solid var(--colour-background-hover);
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    max-height: calc(100vh - 4rem);
-    margin: auto;
-  }
-</style>
+<style no-hash src="./resources/styles.css"></style>
