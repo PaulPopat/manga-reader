@@ -1,0 +1,17 @@
+<template>
+  <if check=":props.large">
+    <div class="text-lg mb-3">
+      <p class="text-gray-500">
+        {props.name}
+      </p>
+      <children />
+    </div>
+  </if>
+  <if check=":!props.large">
+    <p class="text-lg mb-3">
+      <span class="text-gray-500">{props.name}</span>
+      &nbsp;
+      <children />
+    </p>
+  </if>
+</template>

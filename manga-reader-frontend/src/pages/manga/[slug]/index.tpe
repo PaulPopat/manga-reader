@@ -1,72 +1,60 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
 <description>{props.site.welcome_description}</description>
 <template>
-  <div class="container mx-auto">
-    <div class="grid gap-8 grid-cols-1 md:grid-cols-3 mt-6">
-        <img
-          class="mx-auto h-60 w-auto md:h-auto md:w-full object-cover rounded-xl shadow-md"
-          src=":context.PageUrl(props.manga, 1)"
-          alt=":props.manga.title"
-        />
+  <c:container>
+    <c:grid cols="1" md="3">
+      <c:cover-image src=":context.PageUrl(props.manga, 1)" alt=":props.manga.title" />
       <div class="col-span-2">
-        <h1 class="text-4xl font-semibold mb-6">
+        <c:title>
           {props.manga.title}
-        </h1>
-        <p class="text-lg mb-3">
-          <span class="text-gray-500">{props.metadata.artist}</span>
-          &nbsp;
-          <a
-            href=":context.Combine('/artists', props.manga.artist.slug)"
-            class="text-yellow-600 hover:text-yellow-400 visited:text-indigo-600"
-          >
+        </c:title>
+        <c:meta name=":props.metadata.artist">
+          <a:nav-link href=":context.Combine('/artists', props.manga.artist.slug)">
             {props.manga.artist.name}
-          </a>
-        </p>
-        <p class="text-lg mb-3">
-          <span class="text-gray-500">{props.metadata.publisher}</span>
-          &nbsp;
-          <a
-            href=":context.Combine('/publishers', props.manga.publisher.slug)"
-            class="text-yellow-600 hover:text-yellow-400 visited:text-indigo-600"
-          >
+          </a:nav-link>
+        </c:meta>
+        <c:meta name=":props.metadata.publisher">
+          <a:nav-link href=":context.Combine('/publishers', props.manga.publisher.slug)">
             {props.manga.publisher.name}
-          </a>
-        </p>
-        <div class="text-lg mb-3">
-          <p class="text-gray-500">
-            {props.metadata.description}
-          </p>
+          </a:nav-link>
+        </c:meta>
+        <c:meta name=":props.metadata.description" large>
           {props.manga.description}
-        </div>
-        <div class="text-lg mb-3">
-          <p class="text-gray-500">
-            {props.metadata.tags}
-          </p>
+        </c:meta>
+        <c:meta name=":props.metadata.tags" large>
           <for subject=":props.manga.tags" key="tag">
-            <a
-              href=":context.Combine('/tags', tag.slug)"
-              class="inline-block py-2 px-4 my-1 mr-1 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-            >
+            <c:a-button href=":context.Combine('/tags', tag.slug)" inline>
               {tag.name}
-            </a>
+            </c:a-buttona>
           </for>
-        </div>
+        </c:meta>
         <hr class="mb-3" />
-        <a
-          href=":context.Combine('/manga', props.manga.slug, '1')"
-          class="inline-block py-2 px-4 mb-3 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-        >
+        <c:a-button href=":context.Combine('/manga', props.manga.slug, '1')">
           {props.metadata.start_reading}
-        </a>
+        </c:a-button>
       </div>
-    </div>
-  </div>
+    </c:grid>
+    <hr class="mb-6" />
+    <c:grid cols="1" sm="3" md="6" xl="12">
+      <for subject=":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" key="page">
+        <a class="block" href=":context.Combine('/manga', props.manga.slug, (page + props.skip).toString())">
+          <c:cover-image
+            src=":context.PageUrl(props.manga, page + props.skip)"
+            alt=":`Page ${page + props.skip}`"
+          />
+        </a>
+      </for>
+    </c:grid>
+  </c:container>
+  <c:paginator skip=":props.skip" take=":props.take" count=":props.manga.pages" />
 </template>
 <style no-hash src="./resources/styles.css"></style>
 <script area="server" method="get">
   return {
     manga: await context.CollectionItem("manga-books", query.slug),
     metadata: await context.SingleItem("manga-description"),
-    site: await context.SingleItem("site-metadata")
+    site: await context.SingleItem("site-metadata"),
+    skip: parseInt(query.skip || "0"),
+    take: parseInt(query.take || "12"),
   };
 </script>

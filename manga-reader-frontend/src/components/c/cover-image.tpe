@@ -1,0 +1,7 @@
+<template>
+  <img
+    class="mx-auto h-60 w-auto md:h-auto md:w-full object-cover rounded shadow-sm"
+    src=":props.src"
+    alt=":props.alt"
+  />
+</template>

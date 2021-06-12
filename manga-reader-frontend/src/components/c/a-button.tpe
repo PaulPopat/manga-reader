@@ -1,0 +1,25 @@
+<template>
+  <a
+    href=":props.href"
+    class=":context.Classes({
+      'inline-block': true,
+      'py-2': true,
+      'px-4': true,
+      'mb-3': !props.inline,
+      'my-1': props.inline,
+      'mr-1': props.inline,
+      'bg-indigo-500': true,
+      'text-white': true,
+      'font-semibold': true,
+      'rounded-lg': true,
+      'shadow-md': true,
+      'hover:bg-indigo-700': true,
+      'focus:outline-none': true,
+      'focus:ring-2': true,
+      'focus:ring-indigo-400': true,
+      'focus:ring-opacity-75': true,
+    })"
+  >
+    <children />
+  </a>
+</template>

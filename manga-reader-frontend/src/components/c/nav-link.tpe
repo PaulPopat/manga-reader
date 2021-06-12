@@ -1,0 +1,8 @@
+<template>
+  <a
+    href=":props.href"
+    class="text-yellow-600 hover:text-yellow-400 visited:text-indigo-600"
+  >
+    <children />
+  </a>
+</template>

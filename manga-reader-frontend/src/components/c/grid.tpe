@@ -1,0 +1,13 @@
+<template>
+  <div class=":context.Classes('grid', 'my-6', {
+    [`gap-${props.gap || 8}`]: true,
+    [`grid-cols-${props.cols}`]: true,
+    [`sm:grid-cols-${props.sm}`]: props.sm,
+    [`md:grid-cols-${props.md}`]: props.md,
+    [`lg:grid-cols-${props.lg}`]: props.lg,
+    [`xl:grid-cols-${props.xl}`]: props.xl,
+    [`2xl:grid-cols-${props.xxl}`]: props.xxl,
+  })">
+    <children />
+  </div>
+</template>

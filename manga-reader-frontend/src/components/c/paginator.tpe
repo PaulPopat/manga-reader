@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto grid grid-cols-9 gap-4 w-96">
+  <div class="mx-auto grid grid-cols-9 gap-4 w-96 mb-6">
     <if check=":props.skip > 0">
       <a
         href=":`?skip=0&take=${props.take}`"
