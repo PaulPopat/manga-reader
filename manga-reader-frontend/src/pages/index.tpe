@@ -1,12 +1,13 @@
 <title>{props.site.welcome_title} - {props.site.site_title}</title>
 <description>{props.site.welcome_description}</description>
 <template>
-  <c:dark-background>
-    <catalogue manga=":props.manga" />
-    <c:paginator skip=":props.skip" take=":props.take" count=":props.count" />
-  </c:dark-background>
+  <layout>
+    <c:dark-background>
+      <catalogue manga=":props.manga" />
+      <c:paginator skip=":props.skip" take=":props.take" count=":props.count" />
+    </c:dark-background>
+  </layout>
 </template>
-<style no-hash src="./resources/styles.css"></style>
 <script area="server" method="get">
   return {
     site: await context.SingleItem("site-metadata"),

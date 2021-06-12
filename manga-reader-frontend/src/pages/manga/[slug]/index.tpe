@@ -1,54 +1,55 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
 <description>{props.manga.description}</description>
 <template>
-  <c:container>
-    <c:grid cols="1" md="3">
-      <c:cover-image src=":context.PageUrl(props.manga, 1)" alt=":props.manga.title" />
-      <div class="col-span-2">
-        <c:title>
-          {props.manga.title}
-        </c:title>
-        <c:meta name=":props.metadata.artist">
-          <a:nav-link href=":context.Combine('/artists', props.manga.artist.slug)">
-            {props.manga.artist.name}
-          </a:nav-link>
-        </c:meta>
-        <c:meta name=":props.metadata.publisher">
-          <a:nav-link href=":context.Combine('/publishers', props.manga.publisher.slug)">
-            {props.manga.publisher.name}
-          </a:nav-link>
-        </c:meta>
-        <c:meta name=":props.metadata.description" large>
-          {props.manga.description}
-        </c:meta>
-        <c:meta name=":props.metadata.tags" large>
-          <for subject=":props.manga.tags" key="tag">
-            <c:a-button href=":context.Combine('/tags', tag.slug)" inline>
-              {tag.name}
-            </c:a-buttona>
-          </for>
-        </c:meta>
-        <hr class="mb-3" />
-        <c:a-button href=":context.Combine('/manga', props.manga.slug, '1')">
-          {props.metadata.start_reading}
-        </c:a-button>
-      </div>
-    </c:grid>
-    <hr class="mb-6" />
-    <c:grid cols="1" sm="3" md="6" xl="12">
-      <for subject=":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" key="page">
-        <a class="block" href=":context.Combine('/manga', props.manga.slug, (page + props.skip).toString())">
-          <c:cover-image
-            src=":context.PageUrl(props.manga, page + props.skip)"
-            alt=":`Page ${page + props.skip}`"
-          />
-        </a>
-      </for>
-    </c:grid>
-  </c:container>
-  <c:paginator skip=":props.skip" take=":props.take" count=":props.manga.pages" />
+  <layout>
+    <c:container>
+      <c:grid cols="1" md="3">
+        <c:cover-image src=":context.PageUrl(props.manga, 1)" alt=":props.manga.title" />
+        <div class="col-span-2">
+          <c:title>
+            {props.manga.title}
+          </c:title>
+          <c:meta name=":props.metadata.artist">
+            <a:nav-link href=":context.Combine('/artists', props.manga.artist.slug)">
+              {props.manga.artist.name}
+            </a:nav-link>
+          </c:meta>
+          <c:meta name=":props.metadata.publisher">
+            <a:nav-link href=":context.Combine('/publishers', props.manga.publisher.slug)">
+              {props.manga.publisher.name}
+            </a:nav-link>
+          </c:meta>
+          <c:meta name=":props.metadata.description" large>
+            {props.manga.description}
+          </c:meta>
+          <c:meta name=":props.metadata.tags" large>
+            <for subject=":props.manga.tags" key="tag">
+              <c:a-button href=":context.Combine('/tags', tag.slug)" inline>
+                {tag.name}
+              </c:a-buttona>
+            </for>
+          </c:meta>
+          <hr class="mb-3" />
+          <c:a-button href=":context.Combine('/manga', props.manga.slug, '1')">
+            {props.metadata.start_reading}
+          </c:a-button>
+        </div>
+      </c:grid>
+      <hr class="mb-6" />
+      <c:grid cols="1" sm="3" md="6" xl="12">
+        <for subject=":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" key="page">
+          <a class="block" href=":context.Combine('/manga', props.manga.slug, (page + props.skip).toString())">
+            <c:cover-image
+              src=":context.PageUrl(props.manga, page + props.skip)"
+              alt=":`Page ${page + props.skip}`"
+            />
+          </a>
+        </for>
+      </c:grid>
+    </c:container>
+    <c:paginator skip=":props.skip" take=":props.take" count=":props.manga.pages" />
+  </layout>
 </template>
-<style no-hash src="./resources/styles.css"></style>
 <script area="server" method="get">
   return {
     manga: await context.CollectionItem("manga-books", query.slug),

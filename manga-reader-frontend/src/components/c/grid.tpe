@@ -1,5 +1,6 @@
 <template>
-  <div class=":context.Classes('grid', 'my-6', {
+  <div class=":context.Classes('grid', {
+    'my-6': props.slim == null,
     [`gap-${props.gap || 8}`]: true,
     [`grid-cols-${props.cols}`]: true,
     [`sm:grid-cols-${props.sm}`]: props.sm,

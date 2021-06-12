@@ -1,17 +1,19 @@
 <title>{props.manga.title} - {props.site.site_title}</title>
 <description>{props.manga.description}</description>
 <template>
-  <div style="display: grid; height: 100vh; grid-template-rows: 100%; grid-template-columns: 50px auto 50px;">
-    <a href=":props.prev_page" class="flex h-100 justify-center items-center">
-      <icon:chevron-left width="40" height="40" />
-    </a>
-    <a href=":props.next_page">
-      <img class="h-full w-auto mx-auto" src=":context.PageUrl(props.manga, props.page)" />
-    </a>
-    <a href=":props.next_page" class="flex h-100 justify-center items-center">
-      <icon:chevron-right width="40" height="40" />
-    </a>
-  </div>
+  <layout>
+    <div style="display: grid; height: calc(100vh - 48px); grid-template-rows: 100%; grid-template-columns: 50px auto 50px;">
+      <a href=":props.prev_page" class="flex h-100 justify-center items-center">
+        <icon:chevron-left width="40" height="40" />
+      </a>
+      <a href=":props.next_page">
+        <img class="h-full w-auto mx-auto" src=":context.PageUrl(props.manga, props.page)" />
+      </a>
+      <a href=":props.next_page" class="flex h-100 justify-center items-center">
+        <icon:chevron-right width="40" height="40" />
+      </a>
+    </div>
+  </layout>
 </template>
 <script area="server" method="get">
   const manga = await context.CollectionItem("manga-books", query.slug);
@@ -30,4 +32,3 @@
       : context.Combine('/manga', manga.slug)
   };
 </script>
-<style no-hash src="./resources/styles.css"></style>

@@ -1,0 +1,18 @@
+<template>
+  <div class="w-full bg-purple-900">
+    <c:container slim>
+      <c:grid col="1" sm="3" md="6" lg="8" slim>
+        <c:a-button href="/" inline>
+          {props.site.welcome_title}
+        </c:a-button>
+      </c:grid>
+    </c:container>
+  </div>
+  <children />
+</template>
+<style no-hash src="./resources/styles.css"></style>
+<script area="server" method="get">
+  return {
+    site: await context.SingleItem("site-metadata")
+  };
+</script>
