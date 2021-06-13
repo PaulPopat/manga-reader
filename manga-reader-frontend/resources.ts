@@ -16,7 +16,7 @@ export async function ReadJson<T>(path: string, checker: Checker<T>) {
 
 const config = await ReadJson(
   "./config.json",
-  IsObject({ strapi_url: IsString })
+  IsObject({ strapi_url: IsString, strapi_external: IsString })
 );
 
 export async function Collection(
@@ -171,9 +171,19 @@ export function PageUrl(
     .replace("{{page}}", Pad(page, 3));
 }
 
+let site = undefined;
+while (!site) {
+  try {
+    site = await SingleItem("site-metadata");
+  } catch {
+    console.log("Failed to connect to a CMS. Retrying in 5 seconds.");
+    await new Promise((res) => setTimeout(res, 5000));
+  }
+}
+
 export const Site = await SingleItem("site-metadata");
 export const Metadata = await SingleItem("manga-description");
 
 export function AssetUrl(base: { url: string }) {
-  return Combine(config.strapi_url, base.url);
+  return Combine(config.strapi_external, base.url);
 }
