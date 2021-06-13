@@ -1,0 +1,25 @@
+<title>{Site.tags_title} - {Site.site_title}</title>
+<description>{Site.tags_description}</description>
+<template>
+  <c:dark-background>
+    <c:container>
+      <c:grid cols="3" md="4" xl="6">
+        <for subject=":props.tags" key="tag">
+          <c:link-card
+            href=":Combine('/tags', tag.slug)"
+            src=":tag.icon ? AssetUrl(tag.icon) : ''"
+            alt=":tag.icon?.alternativeText ?? tag.name"
+          >
+            {tag.name}
+          </c:link-card>
+        </for>
+      </c:grid>
+    </c:container>
+  </c:dark-background>
+</template>
+<script area="server" method="get">
+  return {
+    tags: await Collection("tags", { _sort: "name:DESC" }),
+  };
+</script>
+#

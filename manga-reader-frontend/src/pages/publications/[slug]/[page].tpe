@@ -1,0 +1,30 @@
+<title>{props.manga.title} - {Site.site_title}</title>
+<description>{props.manga.description}</description>
+<template>
+  <div style="display: grid; height: 100%; grid-template-rows: 100%; grid-template-columns: 50px auto 50px;">
+    <a href=":props.prev_page" class="flex h-full justify-center items-center">
+      <icon:chevron-left width="40" height="40" />
+    </a>
+    <a href=":props.next_page" class="block h-full">
+      <img class="h-full w-auto mx-auto" src=":PageUrl(props.manga, props.page)" />
+    </a>
+    <a href=":props.next_page" class="flex h-full justify-center items-center">
+      <icon:chevron-right width="40" height="40" />
+    </a>
+  </div>
+</template>
+<script area="server" method="get">
+  const manga = await CollectionItem("manga-books", query.slug);
+  const page = parseInt(query.page);
+
+  return {
+    manga: manga,
+    page,
+    next_page: page < manga.pages
+      ? Combine('/publications', manga.slug, (page + 1).toString())
+      : Combine('/publications', manga.slug),
+    prev_page: page > 1
+      ? Combine('/publications', manga.slug, (page - 1).toString())
+      : Combine('/publications', manga.slug)
+  };
+</script>

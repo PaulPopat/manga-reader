@@ -1,3 +1,5 @@
 <template>
-  <h1 class="text-4xl font-semibold mb-6"><children /></h1>
+  <h1 class=":Classes('text-4xl', 'font-semibold', 'mb-6', {
+    [`text-${props.colour}`]: props.colour
+  })"><children /></h1>
 </template>

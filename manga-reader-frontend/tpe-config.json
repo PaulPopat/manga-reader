@@ -8,5 +8,6 @@
   "email": false,
   "author": "",
   "favicon": [],
-  "resources": "./resources.ts"
+  "resources": "./resources.ts",
+  "layout": "./src/layout.tpe"
 }

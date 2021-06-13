@@ -1,0 +1,40 @@
+<template>
+  <div class="site-layout">
+    <div class="w-full bg-purple-900">
+      <c:container slim>
+        <div class="flex items-center">
+          <img class="h-8 w-auto inline-block" src=":AssetUrl(Site.site_icon)" alt=":Site.site_icon.alternativeText" />
+          <a class="inline-block px-3 py-4 hover:bg-purple-700 focus:bg-purple-600 text-white" href="/" inline>
+            {Site.welcome_title}
+          </a>
+          <a class="inline-block px-3 py-4 hover:bg-purple-700 focus:bg-purple-600 text-white" href="/tags" inline>
+            {Site.tags_title}
+          </a>
+          <a class="inline-block px-3 py-4 hover:bg-purple-700 focus:bg-purple-600 text-white" href="/artists" inline>
+            {Site.artists_title}
+          </a>
+          <a class="inline-block px-3 py-4 hover:bg-purple-700 focus:bg-purple-600 text-white" href="/publishers" inline>
+            {Site.publishers_title}
+          </a>
+        </div>
+      </c:container>
+    </div>
+    <div class="site-content">
+      <children />
+    </div>
+  </div>
+</template>
+<style no-hash src="./resources/styles.css"></style>
+<style>
+  .site-layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+</style>

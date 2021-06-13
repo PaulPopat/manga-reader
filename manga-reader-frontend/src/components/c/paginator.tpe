@@ -1,24 +1,24 @@
 <template>
-  <div class="mx-auto grid grid-cols-9 gap-4 w-96 mb-6">
+  <div class="mx-auto grid grid-cols-9 gap-1 w-72 mb-6">
     <if check=":props.skip > 0">
       <a
         href=":`?skip=0&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         <icon:chevrons-left width="24" height="24" />
       </a>
       <a
         href=":`?skip=${Math.max(props.skip - props.take, 0)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         <icon:chevron-left width="24" height="24" />
       </a>
     </if>
     <if check=":props.skip === 0">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
         <icon:chevrons-left width="24" height="24" />
       </span>
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
         <icon:chevron-left width="24" height="24" />
       </span>
     </if>
@@ -26,60 +26,60 @@
     <if check=":props.skip - (props.take * 2) >= 0">
       <a
         href=":`?skip=${props.skip - (props.take * 2)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         {props.page - 2}
       </a>
     </if>
     <if check=":props.skip - (props.take * 2) < 0">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        1
+      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+        &nbsp;
       </span>
     </if>
     
     <if check=":props.skip - props.take >= 0">
       <a
         href=":`?skip=${props.skip - props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         {props.page - 1}
       </a>
     </if>
     <if check=":props.skip - props.take < 0">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        1
+      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+        &nbsp;
       </span>
     </if>
 
-    <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+    <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
       {props.page}
     </span>
     
     <if check=":props.skip + props.take < props.count">
       <a
         href=":`?skip=${props.skip + props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         {props.page + 1}
       </a>
     </if>
     <if check=":props.skip + props.take >= props.count">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        {props.max_page}
+      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+        &nbsp;
       </span>
     </if>
 
     <if check=":props.skip + (props.take * 2) < props.count">
       <a
         href=":`?skip=${props.skip + (props.take * 2)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         {props.page + 2}
       </a>
     </if>
     <if check=":props.skip + (props.take * 2) >= props.count">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        {props.max_page}
+      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+        &nbsp;
       </span>
     </if>
 
@@ -87,22 +87,22 @@
     <if check=":props.skip < (props.count - props.take)">
       <a
         href=":`?skip=${props.skip + props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         <icon:chevron-right width="24" height="24" />
       </a>
       <a
         href=":`?skip=${(props.max_page - 1) * props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
       >
         <icon:chevrons-right width="24" height="24" />
       </a>
     </if>
     <if check=":props.skip >= (props.count - props.take)">
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
         <icon:chevron-right width="24" height="24" />
       </span>
-      <span class="inline-flex opacity-50 justify-center items-center w-10 h-10 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
         <icon:chevrons-right width="24" height="24" />
       </span>
     </if>

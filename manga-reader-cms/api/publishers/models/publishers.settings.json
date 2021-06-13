@@ -25,6 +25,21 @@
     "manga": {
       "via": "publisher",
       "collection": "manga-books"
+    },
+    "icon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }

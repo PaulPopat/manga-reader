@@ -36,6 +36,13 @@
       "group": "build",
       "label": "dev",
       "options": { "cwd": "${workspaceFolder}/manga-reader-frontend" }
+    },
+    {
+      "type": "npm",
+      "script": "develop",
+      "group": "build",
+      "label": "strapi",
+      "options": { "cwd": "${workspaceFolder}/manga-reader-cms" }
     }
   ]
 }

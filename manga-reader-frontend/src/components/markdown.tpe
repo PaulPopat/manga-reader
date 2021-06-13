@@ -1,5 +1,5 @@
 <template>
-  <div data-markdown="true">
+  <div data-markdown="true" class=":Classes({ [`text-${props.colour}`]: props.colour })">
     <children />
   </div>
 </template>

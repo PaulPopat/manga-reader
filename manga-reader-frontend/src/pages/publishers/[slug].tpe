@@ -1,0 +1,33 @@
+<title>{props.publisher.name} - {Site.site_title}</title>
+<description>{props.publisher.description}</description>
+<template>
+  <c:dark-background>
+    <c:container>
+      <c:breadcrumbs links=":[
+        { href: '/', text: Site.welcome_title },
+        { href: '/publishers', text: Site.publishers_title }
+      ]" />
+      <c:title colour="white">{props.publisher.name}</c:title>
+      <markdown colour="white">{props.publisher.description}</markdown>
+      <c:grid cols="1" lg="2">
+        <catalogue manga=":props.manga" />
+      </c:grid>
+    </c:container>
+    <c:paginator skip=":props.skip" take=":props.take" count=":props.count" />
+  </c:dark-background>
+</template>
+<script area="server" method="get">
+  const publisher = await CollectionItem("publishers", query.slug);
+  const skip = parseInt(query.skip || "0");
+  const take = parseInt(query.take || "10");
+  const count = publisher.manga.length;
+  return {
+    manga: await Promise.all(publisher.manga.slice(skip, skip + take).map(
+      m => CollectionItemId("manga-books", m.id.toString()))
+    ),
+    skip,
+    take,
+    count,
+    publisher,
+  };
+</script>

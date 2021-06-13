@@ -1,22 +1,22 @@
 <template>
   <a
     href=":props.href"
-    class=":context.Classes({
+    class=":Classes({
       'inline-block': true,
       'py-2': true,
       'px-4': true,
       'mb-3': props.inline == null,
       'my-1': props.inline != null,
       'mr-1': props.inline != null,
-      'bg-indigo-500': true,
-      'text-white': true,
+      [`bg-${props.colour || 'indigo'}-500`]: true,
+      [`text-${props.text || 'white'}`]: true,
       'font-semibold': true,
       'rounded-lg': true,
       'shadow-md': true,
-      'hover:bg-indigo-700': true,
+      [`hover:bg-${props.colour || 'indigo'}-700`]: true,
       'focus:outline-none': true,
       'focus:ring-2': true,
-      'focus:ring-indigo-400': true,
+      [`focus:ring-${props.colour || 'indigo'}-400`]: true,
       'focus:ring-opacity-75': true,
       'text-center': true,
     })"

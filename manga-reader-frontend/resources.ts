@@ -36,10 +36,7 @@ export async function Collection(
   return data;
 }
 
-export async function CollectionCount(
-  collection: string,
-  query?: Record<string, string>
-) {
+export async function CollectionCount(collection: string) {
   const url = Combine(config.strapi_url, collection, "count");
   const res = await fetch(url);
   const data = await res.text();
@@ -65,6 +62,20 @@ export async function CollectionItem(collection: string, id: string) {
   }
 
   return data[0];
+}
+
+export async function CollectionItemId(collection: string, id: string) {
+  const url = Combine(config.strapi_url, collection, id);
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status > 399) {
+    console.error(url + " => " + res.status);
+    try {
+      console.error(data);
+    } catch {}
+  }
+
+  return data;
 }
 
 export async function SingleItem(id: string) {
@@ -158,4 +169,11 @@ export function PageUrl(
   return manga.page_template
     .replace("{{slug}}", manga.slug)
     .replace("{{page}}", Pad(page, 3));
+}
+
+export const Site = await SingleItem("site-metadata");
+export const Metadata = await SingleItem("manga-description");
+
+export function AssetUrl(base: { url: string }) {
+  return Combine(config.strapi_url, base.url);
 }

@@ -1,0 +1,33 @@
+<title>{props.artist.name} - {Site.site_title}</title>
+<description>{props.artist.description}</description>
+<template>
+  <c:dark-background>
+    <c:container>
+      <c:breadcrumbs links=":[
+        { href: '/', text: Site.welcome_title },
+        { href: '/artists', text: Site.tags_title }
+      ]" />
+      <c:title colour="white">{props.artist.name}</c:title>
+      <markdown colour="white">{props.artist.description}</markdown>
+      <c:grid cols="1" lg="2">
+        <catalogue manga=":props.manga" />
+      </c:grid>
+    </c:container>
+    <c:paginator skip=":props.skip" take=":props.take" count=":props.count" />
+  </c:dark-background>
+</template>
+<script area="server" method="get">
+  const artist = await CollectionItem("artists", query.slug);
+  const skip = parseInt(query.skip || "0");
+  const take = parseInt(query.take || "10");
+  const count = artist.manga.length;
+  return {
+    manga: await Promise.all(artist.manga.slice(skip, skip + take).map(
+      m => CollectionItemId("manga-books", m.id.toString()))
+    ),
+    skip,
+    take,
+    count,
+    artist,
+  };
+</script>

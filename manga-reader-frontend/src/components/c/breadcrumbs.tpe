@@ -1,0 +1,14 @@
+<template>
+  <div class=":Classes(`text-${props.colour || 'white'}`, 'flex', 'items-center', 'mb-6')">
+    <for subject=":props.links" key="link">
+      <a href=":link.href" class="inline-block px-2 py-3 hover:underline">{link.text}</a>
+      <if check=":!link.last">/</if>
+    </for>
+  </div>
+</template>
+<script area="server">
+return {
+  links: props.links.map((l, i) => ({ ...l, last: i === (props.links.length - 1) })),
+  ...props
+};
+</script>

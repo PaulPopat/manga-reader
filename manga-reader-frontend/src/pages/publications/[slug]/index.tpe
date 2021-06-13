@@ -1,0 +1,59 @@
+<title>{props.manga.title} - {Site.site_title}</title>
+<description>{props.manga.description}</description>
+<template>
+  <c:container>
+    <c:grid cols="1" md="3">
+      <c:cover-image src=":PageUrl(props.manga, 1)" alt=":props.manga.title" />
+      <div class="col-span-2">
+        <c:title>
+          {props.manga.title}
+        </c:title>
+        <c:meta name=":Metadata.artist">
+          <a:nav-link href=":Combine('/artists', props.manga.artist.slug)">
+            {props.manga.artist.name}
+          </a:nav-link>
+        </c:meta>
+        <c:meta name=":Metadata.publisher">
+          <a:nav-link href=":Combine('/publishers', props.manga.publisher.slug)">
+            {props.manga.publisher.name}
+          </a:nav-link>
+        </c:meta>
+        <c:meta name=":Metadata.description" large>
+          <markdown>{props.manga.description}</markdown>
+        </c:meta>
+        <c:meta name=":Metadata.tags" large>
+          <for subject=":props.manga.tags" key="tag">
+            <c:a-button href=":Combine('/tags', tag.slug)" inline>
+              {tag.name}
+            </c:a-buttona>
+          </for>
+        </c:meta>
+        <hr class="mb-3" />
+        <c:a-button href=":Combine('/publications', props.manga.slug, '1')">
+          {Metadata.start_reading}
+        </c:a-button>
+      </div>
+    </c:grid>
+    <hr class="mb-6" />
+    <c:grid cols="1" sm="3" md="6" xl="12">
+      <for subject=":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" key="page">
+        <if check=":page + props.skip <= props.manga.pages">
+          <a class="block" href=":Combine('/publications', props.manga.slug, (page + props.skip).toString())">
+            <c:cover-image
+              src=":PageUrl(props.manga, page + props.skip)"
+              alt=":`Page ${page + props.skip}`"
+            />
+          </a>
+        </if>
+      </for>
+    </c:grid>
+  </c:container>
+  <c:paginator skip=":props.skip" take=":props.take" count=":props.manga.pages" />
+</template>
+<script area="server" method="get">
+  return {
+    manga: await CollectionItem("manga-books", query.slug),
+    skip: parseInt(query.skip || "0"),
+    take: parseInt(query.take || "12"),
+  };
+</script>

@@ -1,20 +1,20 @@
 <template>
   <for subject=":props" key="manga">
-    <c:image-card href=":manga.thumbnail" alt=":manga.title">
-      <c:caption href=":context.Combine('/artist', manga.artist.slug)">
+    <c:card href=":manga.thumbnail" alt=":manga.title">
+      <c:caption href=":Combine('/artist', manga.artist.slug)">
         {manga.artist.name}
       </c:caption>
-      <c:heading href=":context.Combine('/manga', manga.slug)">
+      <c:heading href=":Combine('/publications', manga.slug)">
         {manga.title}
       </c:heading>
       <c:description>{manga.description}</c:description>
-    </c:image-card>
+    </c:card>
   </for>
 </template>
 <script area="server" method="get">
   return props.manga.map(m => ({
     ...m,
-    thumbnail: context.PageUrl(m, 1),
+    thumbnail: PageUrl(m, 1),
     description: m.description.substr(0, 200) + (m.description.length > 200 ? "..." : "")
   }));
 </script>

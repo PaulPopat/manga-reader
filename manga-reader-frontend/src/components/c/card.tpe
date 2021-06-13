@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md mx-auto mb-6 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+  <div class="mb-6 bg-white rounded-xl shadow-md overflow-hidden">
     <div class="md:flex">
       <div class="md:flex-shrink-0">
         <img

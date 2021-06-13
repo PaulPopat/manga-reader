@@ -1,0 +1,24 @@
+<title>{Site.artists_title} - {Site.site_title}</title>
+<description>{Site.artists_description}</description>
+<template>
+  <c:dark-background>
+    <c:container>
+      <c:grid cols="3" md="4" xl="6">
+        <for subject=":props.artists" key="artist">
+          <c:link-card
+            href=":Combine('/artists', artist.slug)"
+            src=":artist.icon ? AssetUrl(artist.icon) : ''"
+            alt=":artist.icon?.alternativeText ?? artist.name"
+          >
+            {artist.name}
+          </c:link-card>
+        </for>
+      </c:grid>
+    </c:container>
+  </c:dark-background>
+</template>
+<script area="server" method="get">
+  return {
+    artists: await Collection("artists", { _sort: "name:DESC" }),
+  };
+</script>

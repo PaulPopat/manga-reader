@@ -20,6 +20,36 @@
     },
     "welcome_description": {
       "type": "text"
+    },
+    "tags_title": {
+      "type": "string"
+    },
+    "tags_description": {
+      "type": "text"
+    },
+    "artists_title": {
+      "type": "string"
+    },
+    "artists_description": {
+      "type": "text"
+    },
+    "publishers_title": {
+      "type": "string"
+    },
+    "publishers_description": {
+      "type": "text"
+    },
+    "site_icon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
