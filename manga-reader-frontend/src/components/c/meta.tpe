@@ -1,17 +1,27 @@
 <template>
   <if check=":props.large != null">
-    <div class="text-lg mb-3">
-      <p class="text-gray-500">
-        {props.name}
-      </p>
+    <aside>
+      <p>{props.name}</p>
       <children />
-    </div>
+    </aside>
   </if>
   <if check=":props.large == null">
-    <p class="text-lg mb-3">
-      <span class="text-gray-500">{props.name}</span>
+    <aside>
+      <span>{props.name}</span>
       &nbsp;
       <children />
-    </p>
+    </aside>
   </if>
 </template>
+<style>
+aside {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+p, span {
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+</style>

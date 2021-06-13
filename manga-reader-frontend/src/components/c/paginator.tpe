@@ -1,112 +1,72 @@
 <template>
-  <div class="mx-auto grid grid-cols-9 gap-1 w-72 mb-6">
+  <nav>
     <if check=":props.skip > 0">
-      <a
-        href=":`?skip=0&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=0&take=${props.take}`">
         <icon:chevrons-left width="24" height="24" />
       </a>
-      <a
-        href=":`?skip=${Math.max(props.skip - props.take, 0)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${Math.max(props.skip - props.take, 0)}&take=${props.take}`">
         <icon:chevron-left width="24" height="24" />
       </a>
     </if>
     <if check=":props.skip === 0">
-      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        <icon:chevrons-left width="24" height="24" />
-      </span>
-      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        <icon:chevron-left width="24" height="24" />
-      </span>
+      <span><icon:chevrons-left width="24" height="24" /></span>
+      <span><icon:chevron-left width="24" height="24" /></span>
     </if>
 
     <if check=":props.skip - (props.take * 2) >= 0">
-      <a
-        href=":`?skip=${props.skip - (props.take * 2)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${props.skip - (props.take * 2)}&take=${props.take}`">
         {props.page - 2}
       </a>
     </if>
     <if check=":props.skip - (props.take * 2) < 0">
-      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        &nbsp;
-      </span>
+      <span class="hidden">&nbsp;</span>
     </if>
     
     <if check=":props.skip - props.take >= 0">
-      <a
-        href=":`?skip=${props.skip - props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${props.skip - props.take}&take=${props.take}`">
         {props.page - 1}
       </a>
     </if>
     <if check=":props.skip - props.take < 0">
-      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        &nbsp;
-      </span>
+      <span class="hidden">&nbsp;</span>
     </if>
 
-    <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
+    <span>
       {props.page}
     </span>
     
     <if check=":props.skip + props.take < props.count">
-      <a
-        href=":`?skip=${props.skip + props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${props.skip + props.take}&take=${props.take}`">
         {props.page + 1}
       </a>
     </if>
     <if check=":props.skip + props.take >= props.count">
-      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        &nbsp;
-      </span>
+      <span class="hidden">&nbsp;</span>
     </if>
 
     <if check=":props.skip + (props.take * 2) < props.count">
-      <a
-        href=":`?skip=${props.skip + (props.take * 2)}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${props.skip + (props.take * 2)}&take=${props.take}`">
         {props.page + 2}
       </a>
     </if>
     <if check=":props.skip + (props.take * 2) >= props.count">
-      <span class="inline-flex opacity-0 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        &nbsp;
-      </span>
+      <span class="hidden">&nbsp;</span>
     </if>
 
     
     <if check=":props.skip < (props.count - props.take)">
-      <a
-        href=":`?skip=${props.skip + props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${props.skip + props.take}&take=${props.take}`">
         <icon:chevron-right width="24" height="24" />
       </a>
-      <a
-        href=":`?skip=${(props.max_page - 1) * props.take}&take=${props.take}`"
-        class="inline-flex justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
-      >
+      <a href=":`?skip=${(props.max_page - 1) * props.take}&take=${props.take}`">
         <icon:chevrons-right width="24" height="24" />
       </a>
     </if>
     <if check=":props.skip >= (props.count - props.take)">
-      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        <icon:chevron-right width="24" height="24" />
-      </span>
-      <span class="inline-flex opacity-50 justify-center items-center w-7 h-7 py-1 px-2 bg-white text-gray-800 font-semibold rounded-lg shadow-md">
-        <icon:chevrons-right width="24" height="24" />
-      </span>
+      <span><icon:chevron-right width="24" height="24" /></span>
+      <span><icon:chevrons-right width="24" height="24" /></span>
     </if>
-  </div>
+  </nav>
 </template>
 <script area="server">
   return {
@@ -115,3 +75,56 @@
     max_page: Math.floor(props.count / props.take) + 1
   }
 </script>
+<style>
+nav {
+  margin: 0 auto 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0.25rem;
+  width: 18rem;
+}
+
+a, span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  
+  --tw-text-opacity: 1;
+  color: rgba(31, 41, 55, var(--tw-text-opacity));
+
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+a:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  --tw-ring-opacity: 0.75;
+  --tw-ring-color: rgba(229, 231, 235, var(--tw-ring-opacity));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+span {
+  opacity: 0.5;
+}
+
+.hidden {
+  opacity: 0;
+}
+</style>

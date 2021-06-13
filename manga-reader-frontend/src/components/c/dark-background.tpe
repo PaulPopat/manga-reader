@@ -1,5 +1,15 @@
 <template>
-  <div class="bg-gradient-to-r from-indigo-900 via-green-800 to-purple-900 min-h-full">
+  <div>
     <children />
   </div>
 </template>
+<style>
+div {
+  --tw-gradient-from: #312e81;
+  --tw-gradient-to: #4c1d95;
+  --tw-gradient-stops: var(--tw-gradient-from), #065f46, var(--tw-gradient-to, rgba(6, 95, 70, 0));
+
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  min-height: 100%;
+}
+</style>

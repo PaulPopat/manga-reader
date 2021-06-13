@@ -1,5 +1,10 @@
 <template>
-  <div class="mt-2 text-gray-500">
-    <markdown><children /></markdown>
-  </div>
+  <aside><markdown><children /></markdown></aside>
 </template>
+<style>
+aside {
+  margin-top: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+</style>

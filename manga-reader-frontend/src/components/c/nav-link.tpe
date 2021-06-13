@@ -1,8 +1,17 @@
 <template>
-  <a
-    href=":props.href"
-    class="text-yellow-600 hover:text-yellow-400 visited:text-indigo-600"
-  >
-    <children />
-  </a>
+  <a href=":props.href"><children /></a>
 </template>
+<style>
+a {
+  --tw-text-opacity: 1;
+  color: rgba(217, 119, 6, var(--tw-text-opacity));
+}
+
+a:hover {
+  color: rgba(251, 191, 36, var(--tw-text-opacity));
+}
+
+a:visited {
+  color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
+</style>

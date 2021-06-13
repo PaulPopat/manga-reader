@@ -1,8 +1,18 @@
 <template>
-  <a
-    href=":props.href"
-    class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
-  >
+  <a href=":props.href">
     <children />
   </a>
 </template>
+<style>
+a {
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-text-opacity));
+  font-weight: 600;
+}
+</style>

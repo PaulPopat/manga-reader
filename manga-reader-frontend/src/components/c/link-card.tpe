@@ -1,15 +1,52 @@
 <template>
-  <a
-    href=":props.href"
-    class="flex flex-col bg-white shadow rounded-xl text-center overflow-hidden transition-transform transition-shadow transform hover:scale-110 hover:shadow-lg"
-  >
-    <img
-      src=":props.src"
-      alt=":props.alt"
-      class="w-full h-28 objet-cover"
-    />
-    <span class="inline-block px-4 py-2">
-      <children />
-    </span>
+  <a href=":props.href">
+    <img src=":props.src" alt=":props.alt" />
+    <span><children /></span>
   </a>
 </template>
+<style>
+a {
+  display: flex;
+  flex-direction: column;
+
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  border-radius: 0.75rem;
+  text-align: center;
+  overflow: hidden;
+
+  transition-property: transform, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+a:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+img {
+  width: 100%;
+  height: 7rem;
+  object-fit: cover;
+}
+
+span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+</style>

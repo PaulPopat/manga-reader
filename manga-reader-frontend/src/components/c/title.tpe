@@ -1,5 +1,23 @@
 <template>
-  <h1 class=":Classes('text-4xl', 'font-semibold', 'mb-6', {
+  <h1 class=":Classes( {
     [`text-${props.colour}`]: props.colour
   })"><children /></h1>
 </template>
+<style>
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+</style>

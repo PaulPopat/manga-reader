@@ -1,6 +1,45 @@
 <template>
-  <div class=":Classes('container', 'mx-auto', {
-    'p-4': props.slim == null,
-    'px-4': props.slim != null
-  })"><children /></div>
+  <div class=":Classes({ 'slim': props.slim != null })"><children /></div>
 </template>
+<style>
+div {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  div {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  div {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  div {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  div {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  div {
+    max-width: 1536px;
+  }
+}
+
+.slim {
+  padding: 0 1rem;
+}
+</style>

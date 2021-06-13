@@ -4,7 +4,7 @@
   <c:container>
     <c:grid cols="1" md="3">
       <c:cover-image src=":PageUrl(props.manga, 1)" alt=":props.manga.title" />
-      <div class="col-span-2">
+      <article>
         <c:title>
           {props.manga.title}
         </c:title>
@@ -28,17 +28,17 @@
             </c:a-buttona>
           </for>
         </c:meta>
-        <hr class="mb-3" />
+        <hr class="inline" />
         <c:a-button href=":Combine('/publications', props.manga.slug, '1')">
           {Metadata.start_reading}
         </c:a-button>
-      </div>
+      </article>
     </c:grid>
-    <hr class="mb-6" />
+    <hr />
     <c:grid cols="1" sm="3" md="6" xl="12">
       <for subject=":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" key="page">
         <if check=":page + props.skip <= props.manga.pages">
-          <a class="block" href=":Combine('/publications', props.manga.slug, (page + props.skip).toString())">
+          <a href=":Combine('/publications', props.manga.slug, (page + props.skip).toString())">
             <c:cover-image
               src=":PageUrl(props.manga, page + props.skip)"
               alt=":`Page ${page + props.skip}`"
@@ -57,3 +57,20 @@
     take: parseInt(query.take || "12"),
   };
 </script>
+<style>
+article {
+  grid-column: span 2 / span 2;
+}
+
+hr {
+  margin-bottom: 1.5rem;
+}
+
+.inline {
+  margin-bottom: 0.75rem;
+}
+
+a {
+  display: block;
+}
+</style>

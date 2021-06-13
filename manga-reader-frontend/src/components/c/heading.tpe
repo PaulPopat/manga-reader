@@ -1,15 +1,25 @@
 <template>
   <if check=":props.href">
-    <a
-      href=":props.href"
-      class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
-    >
-      <children />
-    </a>
+    <a href=":props.href"><children /></a>
   </if>
   <if check=":!props.href">
-    <h2 class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-      <children />
-    </h2>
+    <h2><children /></h2>
   </if>
 </template>
+<style>
+a, h2 {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  line-height: 1.25;
+  font-weight: 500;
+
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>

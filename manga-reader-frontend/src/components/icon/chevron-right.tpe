@@ -5,7 +5,6 @@
     height=":props.height"
     viewBox="0 0 24 24"
     fill="none"
-    class=":Classes('stroke-current', { [`text-${props.colour}`]: props.colour })"
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
@@ -13,3 +12,8 @@
     <polyline points="9 18 15 12 9 6" />
   </svg>
 </template>
+<style>
+svg {
+  stroke: currentColor;
+}
+</style>
