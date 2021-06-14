@@ -3,12 +3,12 @@
 <template>
   <c:dark-background>
     <c:container>
-      <c:grid cols="3" md="4" xl="6">
+      <c:grid cols="2" sm="3" md="4" xl="6">
         <for subject=":props.publishers" key="publisher">
           <c:link-card
             href=":Combine('/publishers', publisher.slug)"
-            src=":publisher.icon ? AssetUrl(publisher.icon) : ''"
-            alt=":publisher.icon?.alternativeText ?? publisher.name"
+            src=":PageUrl(publisher.manga[0], 1)"
+            alt=":publisher.manga[0].title"
           >
             {publisher.name}
           </c:link-card>

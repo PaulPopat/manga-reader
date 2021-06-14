@@ -26,9 +26,6 @@
       "via": "tags",
       "collection": "manga-books"
     },
-    "description": {
-      "type": "richtext"
-    },
     "icon": {
       "model": "file",
       "via": "related",

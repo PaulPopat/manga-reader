@@ -11,5 +11,6 @@ div {
 
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   min-height: 100%;
+  padding: 0.5rem 0;
 }
 </style>

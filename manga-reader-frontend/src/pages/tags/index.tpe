@@ -3,7 +3,7 @@
 <template>
   <c:dark-background>
     <c:container>
-      <c:grid cols="3" md="4" xl="6">
+      <c:grid cols="2" sm="3" md="4" xl="6">
         <for subject=":props.tags" key="tag">
           <c:link-card
             href=":Combine('/tags', tag.slug)"
