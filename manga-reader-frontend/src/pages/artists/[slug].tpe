@@ -3,12 +3,11 @@
 <template>
   <c:dark-background>
     <c:container>
-      <c:breadcrumbs links=":[
+      <c:breadcrumbs colour="white" links=":[
         { href: '/', text: Site.welcome_title },
         { href: '/artists', text: Site.tags_title }
       ]" />
       <c:title colour="white">{props.artist.name}</c:title>
-      <markdown colour="white">{props.artist.description}</markdown>
       <c:grid cols="1" lg="2">
         <catalogue manga=":props.manga" />
       </c:grid>

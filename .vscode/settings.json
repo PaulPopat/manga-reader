@@ -15,5 +15,8 @@
     "**/build": true,
     "**/node_modules": true,
     "**/.strapi-updater.json": true
+  },
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": false
   }
 }

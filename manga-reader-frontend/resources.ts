@@ -4,7 +4,7 @@ import {
   IsString,
   IsArray,
   Checker,
-} from "https://deno.land/x/safe_type/mod.ts";
+} from "https://deno.land/x/safe_type@2.2.3/mod.ts";
 
 export async function ReadJson<T>(path: string, checker: Checker<T>) {
   const text = await Deno.readTextFile(path);
@@ -113,16 +113,16 @@ export function WithQuery(
   url: string,
   query: Record<string, string[] | string>
 ) {
+  const encode = (value: string) =>
+    encodeURIComponent(value).replaceAll("%20", "+");
   const rendered = Object.keys(query)
     .map((k) => {
       const val = query[k];
       if (IsArray(IsString)(val)) {
-        return val
-          .map((v) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
-          .join("&");
+        return val.map((v) => encode(k) + "=" + encode(v)).join("&");
       }
 
-      return encodeURIComponent(k) + "=" + encodeURIComponent(val);
+      return encode(k) + "=" + encode(val);
     })
     .join("&");
 

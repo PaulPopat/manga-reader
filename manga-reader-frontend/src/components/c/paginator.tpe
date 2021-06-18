@@ -92,7 +92,7 @@ a, span {
   height: 1.75rem;
   padding: 0.25rem 0.5rem;
   font-weight: 600;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-small);
 
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));

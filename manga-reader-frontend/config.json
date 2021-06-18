@@ -1,4 +1,4 @@
 {
   "strapi_url": "http://localhost:1337/",
-  "strapi_external": "http://192.168.0.100:1337/"
+  "strapi_external": "http://localhost:1337/"
 }

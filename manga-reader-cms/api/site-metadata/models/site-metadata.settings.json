@@ -50,6 +50,9 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "search_title": {
+      "type": "string"
     }
   }
 }
