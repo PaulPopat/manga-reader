@@ -9,7 +9,7 @@
         "--unstable",
         "--allow-read",
         "--allow-write",
-        "https://deno.land/x/sote@0.8.4/build.ts"
+        "https://deno.land/x/sote@0.8.9/build.ts"
       ],
       "group": "build",
       "label": "Build App",
@@ -24,7 +24,8 @@
         "--unstable",
         "--allow-read",
         "--allow-net",
-        "https://deno.land/x/sote@0.8.4/start.ts"
+        "--allow-write",
+        "https://deno.land/x/sote@0.8.9/start.ts"
       ],
       "group": "build",
       "label": "Start App",

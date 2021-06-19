@@ -5,6 +5,7 @@ import {
   IsArray,
   Checker,
 } from "https://deno.land/x/safe_type@2.2.3/mod.ts";
+import { exists } from "https://deno.land/std@0.97.0/fs/mod.ts";
 
 export async function ReadJson<T>(path: string, checker: Checker<T>) {
   const text = await Deno.readTextFile(path);
@@ -186,4 +187,16 @@ export const Metadata = await SingleItem("manga-description");
 
 export function AssetUrl(base: { url: string }) {
   return Combine(config.strapi_external, base.url);
+}
+
+export async function SavePage(
+  manga_slug: string,
+  page: number,
+  data: Uint8Array
+) {
+  if (!await exists(`./_/manga/${manga_slug}`)) {
+    await Deno.mkdir(`./_/manga/${manga_slug}`);
+  }
+
+  await Deno.writeFile(`./_/manga/${manga_slug}/${Pad(page, 3)}.png`, data);
 }

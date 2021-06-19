@@ -28,6 +28,22 @@
       : Combine('/publications', manga.slug)
   };
 </script>
+<script area="server" method="post" body="ignore">
+  const page = parseInt(query.page);
+  await SavePage(query.slug, page, body);
+  const manga = await CollectionItem("manga-books", query.slug);
+
+  return {
+    manga: manga,
+    page,
+    next_page: page < manga.pages
+      ? Combine('/publications', manga.slug, (page + 1).toString())
+      : Combine('/publications', manga.slug),
+    prev_page: page > 1
+      ? Combine('/publications', manga.slug, (page - 1).toString())
+      : Combine('/publications', manga.slug)
+  };
+</script>
 <style>
 div {
   display: grid;
