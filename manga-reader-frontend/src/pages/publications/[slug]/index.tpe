@@ -9,14 +9,14 @@
           {props.manga.title}
         </c:title>
         <c:meta name=":Metadata.artist">
-          <a:nav-link href=":Combine('/artists', props.manga.artist.slug)">
+          <c:nav-link href=":Combine('/artists', props.manga.artist.slug)">
             {props.manga.artist.name}
-          </a:nav-link>
+          </c:nav-link>
         </c:meta>
         <c:meta name=":Metadata.publisher">
-          <a:nav-link href=":Combine('/publishers', props.manga.publisher.slug)">
+          <c:nav-link href=":Combine('/publishers', props.manga.publisher.slug)">
             {props.manga.publisher.name}
-          </a:nav-link>
+          </c:nav-link>
         </c:meta>
         <c:meta name=":Metadata.description" large>
           <markdown>{props.manga.description}</markdown>

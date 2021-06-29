@@ -17,7 +17,11 @@ export async function ReadJson<T>(path: string, checker: Checker<T>) {
 
 const config = await ReadJson(
   "./config.json",
-  IsObject({ strapi_url: IsString, strapi_external: IsString })
+  IsObject({
+    strapi_url: IsString,
+    strapi_external: IsString,
+    image_url: IsString,
+  })
 );
 
 export async function Collection(
@@ -167,9 +171,12 @@ export function PageUrl(
   manga: { page_template: string; slug: string },
   page: number
 ) {
-  return manga.page_template
-    .replace("{{slug}}", manga.slug)
-    .replace("{{page}}", Pad(page, 3));
+  return Combine(
+    config.image_url,
+    manga.page_template
+      .replace("{{slug}}", manga.slug)
+      .replace("{{page}}", Pad(page, 3))
+  );
 }
 
 let site = undefined;
@@ -194,7 +201,7 @@ export async function SavePage(
   page: number,
   data: Uint8Array
 ) {
-  if (!await exists(`./_/manga/${manga_slug}`)) {
+  if (!(await exists(`./_/manga/${manga_slug}`))) {
     await Deno.mkdir(`./_/manga/${manga_slug}`);
   }
 

@@ -1,7 +1,7 @@
 <template>
   <for subject=":props" key="manga">
     <c:card href=":manga.thumbnail" alt=":manga.title">
-      <c:caption href=":Combine('/artist', manga.artist.slug)">
+      <c:caption href=":Combine('/artists', manga.artist.slug)">
         {manga.artist.name}
       </c:caption>
       <c:heading href=":Combine('/publications', manga.slug)">
